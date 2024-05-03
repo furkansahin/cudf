@@ -9,7 +9,7 @@ on:
 jobs:
   process_artifacts:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     outputs:
       artifact_downloaded: ${{ steps.download_artifact.outputs.artifact_downloaded }}
     permissions:
