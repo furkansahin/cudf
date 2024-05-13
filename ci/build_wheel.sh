@@ -6,9 +6,6 @@ set -euo pipefail
 package_name=$1
 package_dir=$2
 
-source rapids-configure-sccache
-source rapids-date-string
-
 version=$(rapids-generate-version)
 commit=$(git rev-parse HEAD)
 
