@@ -6,7 +6,6 @@ set -euo pipefail
 package_name=$1
 package_dir=$2
 
-version=$(rapids-generate-version)
 commit=$(git rev-parse HEAD)
 
 RAPIDS_PY_CUDA_SUFFIX="$(rapids-wheel-ctk-name-gen ${RAPIDS_CUDA_VERSION})"
@@ -19,7 +18,6 @@ PACKAGE_CUDA_SUFFIX="-${RAPIDS_PY_CUDA_SUFFIX}"
 pyproject_file="${package_dir}/pyproject.toml"
 
 sed -i "s/^name = \"${package_name}\"/name = \"${package_name}${PACKAGE_CUDA_SUFFIX}\"/g" ${pyproject_file}
-echo "${version}" > VERSION
 sed -i "/^__git_commit__/ s/= .*/= \"${commit}\"/g" "${package_dir}/${package_name//-/_}/_version.py"
 
 # For nightlies we want to ensure that we're pulling in alphas as well. The
